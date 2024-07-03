@@ -73,3 +73,6 @@ Parkinson's disease is characterized by the death of dopamine-producing neurons 
 - [Understanding Parkinson's Disease: A Guide for Patients and Caregivers](https://www.parkinsons.org.uk/information-and-support/understanding-parkinsons-booklet)
 - [Parkinson's Disease: Research and Clinical Insights](https://link.springer.com/book/10.1007/978-3-319-57201-6)
 
+## Docs
+Please refer to the [wiki](https://github.com/Samuele95/parkinson-repast-kit/wiki) for the overall docs and usage instructions.
+
