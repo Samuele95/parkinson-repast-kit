@@ -15,6 +15,9 @@
 ## Overview
 PRKModel is a MultiAgent-Based Model (MABM) designed to simulate Parkinson's disease using Repast Simphony. It models the interactions within the nervous system, including neurons, astrocytes, microglia, cytokines, and mitochondria, to study the progression of Parkinson's disease. The framework supports the collection of statistical data on the states and activities of these agents.
 
+## Docs
+Please refer to the [wiki](https://github.com/Samuele95/parkinson-repast-kit/wiki) for the overall docs and usage instructions.
+
 ## Key Features
 - **Agent-Based Design:** Autonomous agents representing neurons, astrocytes, microglia, mitochondria, and cytokines.
 - **Simulation Environment:** Built using Repast Simphony for agent-based modeling and 3D visualization.
@@ -40,20 +43,6 @@ PRKModel is a MultiAgent-Based Model (MABM) designed to simulate Parkinson's dis
 3. **Collect data:**
    Use the `DataCollector` class to gather statistics during the simulation.
 
-## Model Logic
-The model includes several agents and their interactions:
-- **Neurons:** Produce dopamine, can degenerate, interact with Lewy bodies, request mitochondria from astrocytes.
-- **Astrocytes:** Support neurons by transferring mitochondria, can be deactivated by pro-inflammatory cytokines.
-- **Microglia:** Produce cytokines in response to Lewy bodies, participate in inflammatory responses.
-- **Cytokines:** Interact with neurons, astrocytes, and microglia, influencing their states.
-- **Mitochondria:** Produce dopamine within neurons, can be transferred between neurons, destroyed under stress.
-
-## Formal Model Description
-PRKModel uses a combination of S[b] Calculus and Ambient Calculus to formally describe the interactions and behaviors of the agents. This approach captures both the discrete state transitions and the spatial relationships among agents, ensuring a comprehensive and precise simulation of Parkinson's disease progression.
-
-## Parkinson's Disease
-Parkinson's disease is characterized by the death of dopamine-producing neurons in the brain. The model simulates key aspects such as dopamine deficiency, Lewy body formation, and neuroinflammation to provide insights into the disease's progression.
-
 ### Further Reading:
 - [Parkinson's Disease Overview - Mayo Clinic](https://www.mayoclinic.org/diseases-conditions/parkinsons-disease/symptoms-causes/syc-20376055)
 - [Parkinson's Disease - National Institute on Aging](https://www.nia.nih.gov/health/parkinsons-disease)
@@ -72,7 +61,3 @@ Parkinson's disease is characterized by the death of dopamine-producing neurons 
 ### Publications
 - [Understanding Parkinson's Disease: A Guide for Patients and Caregivers](https://www.parkinsons.org.uk/information-and-support/understanding-parkinsons-booklet)
 - [Parkinson's Disease: Research and Clinical Insights](https://link.springer.com/book/10.1007/978-3-319-57201-6)
-
-## Docs
-Please refer to the [wiki](https://github.com/Samuele95/parkinson-repast-kit/wiki) for the overall docs and usage instructions.
-
