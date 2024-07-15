@@ -10,7 +10,6 @@
 ![GitHub](https://img.shields.io/github/license/Samuele95/parkinson-repast-kit)
 ![GitHub language](https://img.shields.io/github/languages/top/Samuele95/parkinson-repast-kit)
 ![Maintained](https://img.shields.io/badge/Maintained-yes-green)
-![Java](https://img.shields.io/badge/Made%20with-Java-blue)
 
 ## Overview
 PRKModel is a MultiAgent-Based Model (MABM) designed to simulate Parkinson's disease using Repast Simphony. It models the interactions within the nervous system, including neurons, astrocytes, microglia, cytokines, and mitochondria, to study the progression of Parkinson's disease. The framework supports the collection of statistical data on the states and activities of these agents.
