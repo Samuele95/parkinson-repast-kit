@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"prkmodel.repast"},{"l":"prkmodel.repast.visualization"},{"l":"prkmodel.statistics"},{"l":"prkmodel.types"},{"l":"prkmodel.types.templates"},{"l":"prkmodel.utils"}];updateSearchResults();
