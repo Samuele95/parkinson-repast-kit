@@ -1,7 +1,5 @@
 # Parkinson Repast Kit Model (PRKModel)
-<p align="center">
-  <img src="https://github.com/Samuele95/parkinson-repast-kit/blob/main/PRKModelLogo.png?raw=true" alt="Parkinson's Repast Kit Model Logo"/>
-</p>
+![Parkinson](https://github.com/user-attachments/assets/fab01f05-6f09-4421-a355-896de3dfb3da)
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/Samuele95/parkinson-repast-kit)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Samuele95/parkinson-repast-kit)
