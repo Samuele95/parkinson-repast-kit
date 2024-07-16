@@ -69,11 +69,13 @@ public abstract class AbstractNervousSystemElement implements NervousSystemEleme
      * @param z the Z coordinate of the element
      * @param randomOffsets whether to apply random offsets to the coordinates
      * @throws NullPointerException if the nervous system or type is null
+     * @throws IllegalArgumentException if the coordinates are invalid
      */
     public AbstractNervousSystemElement(NervousSystem nsystem, ModelElementType type, double x, double y, double z, boolean randomOffsets) {
         this.nsystem = Objects.requireNonNull(nsystem);
         this.type = Objects.requireNonNull(type);
         this.deleted = false;
+        // If randomOffsets is true, it sets the position with a little offset w.r.t. the given x,y,z value
         setPosX(x + ((randomOffsets) ? nsystem.getPNRG().nextDouble(-1, 1) : 0.0));
         setPosY(y + ((randomOffsets) ? nsystem.getPNRG().nextDouble(-1, 1) : 0.0));
         setPosZ(z + ((randomOffsets) ? nsystem.getPNRG().nextDouble(-1, 1) : 0.0));
@@ -135,6 +137,8 @@ public abstract class AbstractNervousSystemElement implements NervousSystemEleme
      */
     @Override
     public void setPosX(double x) {
+    	if (x > getNervousSystem().getDimensionX())
+    		throw new IllegalArgumentException("Invalid X coordinate");
         this.x = Math.max(x, 0);
     }
 
@@ -143,6 +147,8 @@ public abstract class AbstractNervousSystemElement implements NervousSystemEleme
      */
     @Override
     public void setPosY(double y) {
+    	if (y > getNervousSystem().getDimensionY())
+    		throw new IllegalArgumentException("Invalid Y coordinate");
         this.y = Math.max(y, 0);
     }
 
@@ -151,6 +157,8 @@ public abstract class AbstractNervousSystemElement implements NervousSystemEleme
      */
     @Override
     public void setPosZ(double z) {
+    	if (z > getNervousSystem().getDimensionZ())
+    		throw new IllegalArgumentException("Invalid Z coordinate");
         this.z = Math.max(z, 0);
     }
 

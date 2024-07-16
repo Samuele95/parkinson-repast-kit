@@ -74,14 +74,10 @@ public class DefaultMicroglia extends AbstractNervousSystemElement implements Mi
      */
     @Override
     public void produceCytokines() {
-        double probability = getNervousSystem().getPNRG().nextDouble(0, 1);
-        //if (probability < 0.1) {
-        //    return;
-        if (probability < 0.5) {
+        if (getNervousSystem().pickProbability() < 0.5) 
             produceCytokine(false);
-        } else if (detectLewyBodies()) {
+        else if (detectLewyBodies()) 
             produceCytokine(true);
-        }
     }
 
     /**
@@ -103,7 +99,7 @@ public class DefaultMicroglia extends AbstractNervousSystemElement implements Mi
             NervousSystemElement cytokine = (isProInflammatory)
                     ? getNervousSystem().getFactory().setTarget(target.get()).setParent(this).create(ModelElementType.PROCYTOKINE, getPosX(), getPosY(), getPosZ())
                     : getNervousSystem().getFactory().setTarget((Neuron) target.get()).setParent(this).create(ModelElementType.ANTICYTOKINE, getPosX(), getPosY(), getPosZ());
-            System.out.println("Cytokine created: " + cytokine + " with target: " + target.get());
+            getNervousSystem().getLogger().info("Cytokine created: " + cytokine + " with target: " + target.get());
         }
     }
 

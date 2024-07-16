@@ -82,7 +82,7 @@ public abstract class AbstractCytokine<T extends NervousSystemElement> extends A
         if (!getNervousSystem().getElements().contains(Objects.requireNonNull(target)) && !getNervousSystem().getNeurons().contains(Objects.requireNonNull(target))) {
             throw new IllegalArgumentException("Target must be present in nervous system");
         }
-        this.target = target;
+        this.target = Objects.requireNonNull(target);
         this.parentMicroglia = Objects.requireNonNull(parentMicroglia);
         this.lifespan = lifespan;
         this.attached = false;
@@ -151,9 +151,8 @@ public abstract class AbstractCytokine<T extends NervousSystemElement> extends A
      */
     @Override
     public void attachToTargets() {
-        if (this.computeDistanceFrom(target) <= 1.0) {
+        if (this.computeDistanceFrom(target) <= 1.0) 
             attached = true;
-        }
     }
 
     /**

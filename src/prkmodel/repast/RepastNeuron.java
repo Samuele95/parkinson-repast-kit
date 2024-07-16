@@ -68,17 +68,5 @@ public final class RepastNeuron extends DefaultNeuron {
     public void step() {
         super.work();
     }
-
-    /**
-     * {@inheritDoc}
-     * 
-     * Deletes this neuron from the Repast context.
-     */
-    @Override
-    public boolean delete() {
-        boolean result = super.delete();
-        RepastNervousSystemElementFactory.INSTANCE.getContext().remove(this);
-        return result;
-    }
 }
 

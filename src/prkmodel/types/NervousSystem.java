@@ -138,6 +138,17 @@ public interface NervousSystem {
      * @see NervousSystemElement
      */
     void addElement(NervousSystemElement element);
+    
+    /**
+     * Adds the specified number of elements of the given type to
+     * the nervous system.
+     * 
+     * @param type the type of the element to be added
+     * @param num the number of elements of that type to be added
+     * @throws NullPointerException if the type is null
+     * @see ModelElementType
+     */
+	void addElements(ModelElementType type, int num);  
 
     /**
      * Adds the specified number of astrocytes to the nervous system.
@@ -382,7 +393,17 @@ public interface NervousSystem {
             throw new IllegalArgumentException("No alive neurons in the nervous system.");
         }
         return aliveNeurons.stream().skip(getPNRG().nextInt(aliveNeurons.size())).findFirst();
-    }    
+    }
+    
+    /**
+     * Picks a probability value from the PNRG.
+     * 
+     * @return a double value between 0 and 1 representing a probability value.
+     */
+    default double pickProbability() {
+    	return getPNRG().nextDouble(0, 1);
+    }
+  
 }
 
 

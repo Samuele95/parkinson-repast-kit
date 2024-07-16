@@ -164,6 +164,20 @@ public interface Neuron extends NervousSystemElement {
     default Optional<NeuronGuestElement> generateLewyBody(double probability) {
         return generateGuestElement(ModelElementType.LEWYBODY, probability);
     }
+    
+    /**
+     * Generates a series of guest elements of a specified type with a given probability.
+     * 
+     * @param elementType the type of the guest element to generate.
+     * @param probability the probability of generating the guest element.
+     * @param number the number of elements to generate.
+     * @see ModelElementType
+     * @see NeuronGuestElement
+     */
+    default void generateGuestElements(ModelElementType elementType, double probability, int number) {
+    	for (int i = 0; i <= number; i++) 
+            generateGuestElement(elementType, probability);
+    }
 
     /**
      * Retrieves a stream of mitochondria contained within the neuron.

@@ -58,17 +58,5 @@ public final class RepastNeuronGuestElement extends AbstractNeuronGuestElement {
         RepastNervousSystemElementFactory.INSTANCE.getContext().add(this);
         RepastNervousSystemElementFactory.INSTANCE.getSpace().moveTo(this, getPosX(), getPosY(), getPosZ());
     }
-
-    /**
-     * {@inheritDoc}
-     * 
-     * Deletes this guest element from the Repast context.
-     */
-    @Override
-    public boolean delete() {
-        boolean result = super.delete();
-        RepastNervousSystemElementFactory.INSTANCE.getContext().remove(this);
-        return result;
-    }
 }
 

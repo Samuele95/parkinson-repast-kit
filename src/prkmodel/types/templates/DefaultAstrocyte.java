@@ -85,9 +85,8 @@ public class DefaultAstrocyte extends AbstractNervousSystemElement implements As
      */
     @Override
     public void activate() {
-        if (isActive()) {
+        if (isActive())
             supportNeurons();
-        }
     }
 
     /**

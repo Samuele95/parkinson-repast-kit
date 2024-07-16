@@ -212,7 +212,13 @@ public class DefaultNeuronNetwork implements NeuronNetwork {
      */
     @Override
     public boolean addNeuron() {
-        return this.getNeurons().add((Neuron) getNervousSystem().getFactory().create(ModelElementType.NEURON, RandomHelper.nextDoubleFromTo(0, 49), RandomHelper.nextDoubleFromTo(0, 49), RandomHelper.nextDoubleFromTo(0, 49)));
+        return this.getNeurons().add((Neuron) getNervousSystem().getFactory().create(
+        		ModelElementType.NEURON, 
+        		getNervousSystem().getPNRG().nextDouble(0, getNervousSystem().getDimensionX() - 1), 
+        		getNervousSystem().getPNRG().nextDouble(0, getNervousSystem().getDimensionY() - 1), 
+        		getNervousSystem().getPNRG().nextDouble(0, getNervousSystem().getDimensionZ() - 1)
+        		)
+        );
     }
 
     /**

@@ -87,7 +87,7 @@ public class DefaultAntiInflammatoryCytokine extends AbstractCytokine<Neuron> {
      */
     @Override
     public void interactWithTarget() {
-        if (isAttachedToTarget() && (getNervousSystem().getPNRG().nextDouble(0, 1) < 0.6)) {
+        if (isAttachedToTarget() && (getNervousSystem().pickProbability() < 0.6)) {
             getTarget().deleteRandomGuestElement(ModelElementType.LEWYBODY);
         }
     }

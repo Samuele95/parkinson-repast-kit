@@ -93,6 +93,7 @@ public interface NervousSystemElement {
     
     /**
      * Sets the X coordinate of this element's position.
+     * If the value is negative, it defaults to 0.
      * 
      * @param x the new X coordinate.
      * @throws IllegalArgumentException if the coordinate is invalid.
@@ -101,6 +102,7 @@ public interface NervousSystemElement {
     
     /**
      * Sets the Y coordinate of this element's position.
+     * If the value is negative, it defaults to 0.
      * 
      * @param y the new Y coordinate.
      * @throws IllegalArgumentException if the coordinate is invalid.
@@ -109,6 +111,7 @@ public interface NervousSystemElement {
     
     /**
      * Sets the Z coordinate of this element's position.
+     * If the value is negative, it defaults to 0.
      * 
      * @param z the new Z coordinate.
      * @throws IllegalArgumentException if the coordinate is invalid.

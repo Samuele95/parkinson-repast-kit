@@ -77,9 +77,7 @@ public class DefaultNeuron extends AbstractNervousSystemElement implements Neuro
         super(Objects.requireNonNull(network).getNervousSystem(), type, x, y, z, false);
         this.network = network;
         this.state = new DefaultNeuronState();
-        for (int i = 0; i <= network.getNervousSystem().getMitochondriaPerNeuron(); i++) {
-            getNervousSystem().getFactory().setParent(this).create(ModelElementType.MITOCHONDRIA, getPosX(), getPosY(), getPosZ());
-        }
+        this.generateGuestElements(ModelElementType.MITOCHONDRIA, 2.0, getNervousSystem().getMitochondriaPerNeuron());
     }
 
     /**
@@ -144,9 +142,8 @@ public class DefaultNeuron extends AbstractNervousSystemElement implements Neuro
          */
         @Override
         public void increaseDopamineProduction() {
-            if (isDegenerating()) {
+            if (isDegenerating()) 
                 dopamineLevel += getNervousSystem().getPNRG().nextDouble(0, (dopamineLevel / 2)); // arbitrary increase
-            }
         }
 
         /**
@@ -187,9 +184,8 @@ public class DefaultNeuron extends AbstractNervousSystemElement implements Neuro
      */
     @Override
     public boolean hasExcessMitochondria() {
-        if (isDopamineLevelLow()) {
+        if (isDopamineLevelLow()) 
             return false;
-        }
         double requiredMitochondria = (100.0 - state.getDopamineLevel()) / 10.0; // Example function
         return getContainedMitochondria().size() > requiredMitochondria;
     }
@@ -199,10 +195,8 @@ public class DefaultNeuron extends AbstractNervousSystemElement implements Neuro
      */
     @Override
     public boolean shouldDegenerate() {
-        int lewyBodyCount = getContainedLewyBodies().size();
-        int mitochondriaCount = getContainedMitochondria().size();
-        double degenerationProbability = 1.25 * lewyBodyCount / mitochondriaCount;
-        return getNervousSystem().getPNRG().nextDouble(0, 1) < degenerationProbability;
+        double degenerationProbability = 1.25 * getLewyBodyMitochondriaRatio();
+        return getNervousSystem().pickProbability() < degenerationProbability;
     }
 
     /**
@@ -210,9 +204,8 @@ public class DefaultNeuron extends AbstractNervousSystemElement implements Neuro
      */
     @Override
     public Optional<NeuronGuestElement> generateGuestElement(ModelElementType elementType, double probability) {
-        if (getNetwork().getNervousSystem().getPNRG().nextDouble(0, 1) < probability && (elementType.equals(ModelElementType.LEWYBODY) || elementType.equals(ModelElementType.MITOCHONDRIA))) {
+        if (getNetwork().getNervousSystem().pickProbability() < probability && (elementType.equals(ModelElementType.LEWYBODY) || elementType.equals(ModelElementType.MITOCHONDRIA)))
             return Optional.of((NeuronGuestElement) getNervousSystem().getFactory().setParent(this).create(elementType, getPosX(), getPosY(), getPosZ()));
-        }
         return Optional.empty();
     }
 
@@ -265,16 +258,12 @@ public class DefaultNeuron extends AbstractNervousSystemElement implements Neuro
      */
     @Override
     public void work() {
-        if (isDead() || isDeleted()) {
+        if (isDead() || isDeleted()) 
             return;
-        }
-        if (!isDegenerating() && shouldDegenerate()) {
+        if (!isDegenerating() && shouldDegenerate()) 
             state.setType(NeuronStateDescription.DEGENERATING);
-        }
-
-        if (isDegenerating() && !shouldDegenerate()) {
+        if (isDegenerating() && !shouldDegenerate()) 
             state.setType(NeuronStateDescription.HEALTHY);
-        }
 
         double scaledRatio = 10 * getLewyBodyMitochondriaRatio();
         state.updateDopamine((!isDegenerating()) ? scaledRatio : -scaledRatio);
@@ -282,10 +271,8 @@ public class DefaultNeuron extends AbstractNervousSystemElement implements Neuro
         generateMitochondria(0.5);
         generateLewyBody((isDegenerating()) ? 0.6 : 0.1);
 
-        if (state.getDopamineLevel() < getNervousSystem().getMitoTransferThreshold()) {
+        if (state.getDopamineLevel() < getNervousSystem().getMitoTransferThreshold()) 
             requestMitochondria();
-        }
-
         if (isDegenerating() && state.getDopamineLevel() <= 0) {
             System.out.println("Neuron dying: " + this);
             delete();

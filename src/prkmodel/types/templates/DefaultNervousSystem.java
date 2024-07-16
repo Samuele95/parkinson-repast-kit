@@ -41,7 +41,6 @@ import prkmodel.types.NervousSystemElement;
 import prkmodel.types.NeuronNetwork;
 import prkmodel.utils.Builder;
 import prkmodel.utils.NervousSystemElementFactory;
-import repast.simphony.random.RandomHelper;
 
 /**
  * Default implementation of the {@link NervousSystem} interface.
@@ -95,7 +94,9 @@ public class DefaultNervousSystem implements NervousSystem {
      * @throws IllegalArgumentException if any dimension is invalid
      */
     public DefaultNervousSystem(int xdim, int ydim, int zdim, double mitoTransferThreshold, int lewyBodyDegenerationThreshold, double baseDegenerationProbability, int mitochondriaPerNeuron) {
-        this.rand = new Random();
+        if (xdim < 0 || ydim < 0  || zdim < 0) 
+        	throw new IllegalArgumentException("Nervous system dimension is invalid");
+    	this.rand = new Random();
         this.nnetwork = new DefaultNeuronNetwork(this);
         this.xdim = xdim;
         this.ydim = ydim;
@@ -291,10 +292,22 @@ public class DefaultNervousSystem implements NervousSystem {
      * {@inheritDoc}
      */
     @Override
+    public void addElements(ModelElementType type, int num) {
+    	if (Objects.requireNonNull(type).equals(ModelElementType.NEURON)) 
+    		getNeuronNetwork().addNeurons(num);
+    	else {
+    		for (int i = 0; i < num; i++)
+    			addElement((getFactory().create(type, rand.nextDouble(0, xdim - 1), rand.nextDouble(0, ydim - 1), rand.nextDouble(0, zdim - 1))));
+    	}
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public NeuronNetwork setNeuronNetwork(NeuronNetwork network) {
-        if (!Objects.requireNonNull(network).getNervousSystem().equals(this)) {
+        if (!Objects.requireNonNull(network).getNervousSystem().equals(this)) 
             throw new IllegalArgumentException("Network must be referring to this nervous system!");
-        }
         return this.nnetwork = network;
     }
     
@@ -321,9 +334,7 @@ public class DefaultNervousSystem implements NervousSystem {
      */
     @Override
     public DefaultNervousSystem addAstrocytes(int astrocyteSize) {
-        for (int i = 0; i < astrocyteSize; i++) {
-            addElement((getFactory().create(ModelElementType.ASTROCYTE, RandomHelper.nextDoubleFromTo(0, 49), RandomHelper.nextDoubleFromTo(0, 49), RandomHelper.nextDoubleFromTo(0, 49))));
-        }
+        addElements(ModelElementType.ASTROCYTE, astrocyteSize);
         return this;
     }
     
@@ -332,9 +343,7 @@ public class DefaultNervousSystem implements NervousSystem {
      */
     @Override
     public DefaultNervousSystem addMicroglia(int microgliaSize) {
-        for (int i = 0; i < microgliaSize; i++) {
-            addElement((getFactory().create(ModelElementType.MICROGLIA, RandomHelper.nextDoubleFromTo(0, 49), RandomHelper.nextDoubleFromTo(0, 49), RandomHelper.nextDoubleFromTo(0, 49))));
-        }
+    	addElements(ModelElementType.MICROGLIA, microgliaSize);
         return this;
     }
     
@@ -349,7 +358,7 @@ public class DefaultNervousSystem implements NervousSystem {
     
     private void setupLogger() {
         try {
-            FileHandler fileHandler = new FileHandler("app.log", true);
+            FileHandler fileHandler = new FileHandler("prklogfile.log", true);
             fileHandler.setLevel(Level.ALL);
             fileHandler.setFormatter(new SimpleFormatter());
             logger.addHandler(fileHandler);

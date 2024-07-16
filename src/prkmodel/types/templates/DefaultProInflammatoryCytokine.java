@@ -91,7 +91,7 @@ public class DefaultProInflammatoryCytokine<T extends NervousSystemElement> exte
      */
     @Override
     public void interactWithTarget() {
-        if (getTarget() instanceof Neuron && getNervousSystem().getPNRG().nextDouble(0, 1) < 0.4) {
+        if (getTarget() instanceof Neuron && getNervousSystem().pickProbability() < 0.4) {
             Neuron target = (Neuron) getTarget();
             if (target.isMyelinated()) {
                 target.getState().updateMyelin(-getNervousSystem().getPNRG().nextInt(1, 5));

@@ -27,6 +27,7 @@ package prkmodel.repast;
 import prkmodel.types.templates.DefaultNervousSystem;
 import repast.simphony.context.Context;
 import repast.simphony.engine.environment.RunEnvironment;
+import repast.simphony.engine.schedule.ScheduleParameters;
 import repast.simphony.engine.schedule.ScheduledMethod;
 import repast.simphony.space.continuous.ContinuousSpace;
 import repast.simphony.space.graph.Network;
@@ -130,7 +131,7 @@ public final class RepastNervousSystem extends DefaultNervousSystem {
      * This method is called by the Repast Simphony scheduler at regular intervals.
      * If there are no neurons left, the simulation run will end.
      */
-    @ScheduledMethod(start = 1, interval = 100)
+    @ScheduledMethod(start = 1, interval = 100, priority=ScheduleParameters.FIRST_PRIORITY)
     public void step() { 
         if (getNeurons().size() == 0) {
             RunEnvironment.getInstance().endRun();
